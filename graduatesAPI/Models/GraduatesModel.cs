@@ -12,7 +12,7 @@ namespace graduatesAPI.Models
         public string? PhoneNumber { get; set; }
         [DataType(DataType.Date)]
         public DateOnly DateOfBirth { get; set; }
-        public decimal Age { get; set; }
+        public Int32 Age { get; set; }
         [DataType(DataType.Date)]
         public DateTime DateCreated { get; set; }
         [DataType(DataType.Date)]

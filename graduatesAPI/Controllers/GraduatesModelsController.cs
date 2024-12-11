@@ -51,6 +51,11 @@ namespace graduatesAPI.Controllers
                 return BadRequest();
             }
 
+            DateTime editedDate = DateTime.Now;
+            graduatesModel.DateEdited = editedDate;
+
+            graduatesModel.Age = Convert.ToInt32(DateTime.Now.Subtract(Convert.ToDateTime(graduatesModel.DateOfBirth.ToString())).Days / 365);
+
             _context.Entry(graduatesModel).State = EntityState.Modified;
 
             try
@@ -77,6 +82,10 @@ namespace graduatesAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<GraduatesModel>> PostGraduatesModel(GraduatesModel graduatesModel)
         {
+            DateTime createdDate = DateTime.Now;
+            graduatesModel.DateCreated = createdDate;
+            graduatesModel.DateEdited = createdDate;
+            graduatesModel.Age = Convert.ToInt32(DateTime.Now.Subtract(Convert.ToDateTime(graduatesModel.DateOfBirth.ToString())).Days / 365);
             _context.GraduatesModels.Add(graduatesModel);
             await _context.SaveChangesAsync();
 

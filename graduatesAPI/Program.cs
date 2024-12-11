@@ -5,12 +5,15 @@ var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowSpecificOrigins,
                       policy =>
                       {
-                          policy.WithOrigins("http://localhost:3000",
+                          policy.WithOrigins("https://playtunes100.github.io",
+                                            "https://playtunes100.github.io/_LevelUpAssessment",
                                               "*")
                                                 .AllowAnyHeader()
                                                 .AllowAnyMethod();
@@ -38,7 +41,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors(MyAllowSpecificOrigins);
+app.UseCors(options => options.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://playtunes100.github.io","https://playtunes100.github.io/_LevelUpAssessment","*"));
 
 app.UseAuthorization();
 
